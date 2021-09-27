@@ -24,6 +24,12 @@ async function checkTables() {
   try{
     console.log('checking db tables')
     const results = await db.query(`
+      CREATE TABLE IF NOT EXISTS restaurants(
+        id BIGSERIAL NOT NULL PRIMARY KEY,
+        name VARCHAR(50),
+        location VARCHAR(50),
+        price_range INT
+      );
       CREATE TABLE IF NOT EXISTS reviews (
         id BIGSERIAL NOT NULL PRIMARY KEY,
         restaurant_id BIGINT NOT NULL REFERENCES restaurants(id),
@@ -43,7 +49,9 @@ async function checkTables() {
 };
 checkTables();
 
-
+app.get('/test',()=>{
+  console.log('test') 
+});
 
 
 // Get all Restaurants

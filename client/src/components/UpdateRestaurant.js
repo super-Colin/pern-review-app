@@ -1,13 +1,13 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
-import {RestuarantContext} from '../contexts/RestuarantContext';
-import RestuarantFinder from '../apis/RestuarantFinder';
+// import {RestaurantsContext} from '../context/RestaurantsContext';
+import RestaurantFinder from '../apis/RestaurantFinder';
 
 
-const UpdateRestuarant = (props) => {
+const UpdateRestaurant = (props) => {
   const { id } = useParams();
   let history = useHistory();
-  const { restaurants } = useContext(RestaurantsContext);
+  // const { restaurants } = useContext(RestaurantsContext);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
@@ -80,4 +80,4 @@ const UpdateRestuarant = (props) => {
   )
 }
 
-export default UpdateRestuarant
+export default UpdateRestaurant

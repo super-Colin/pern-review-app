@@ -2,7 +2,7 @@ import React from "react";
 import StarRating from "./StarRating";
 
 
-const Reviews = () => {
+const Reviews = ({reviews}) => {
   return (
     <div className="row row-cols-3 mb-2">
       {reviews.map((review) => {

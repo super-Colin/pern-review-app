@@ -1,21 +1,23 @@
-import React from 'react'
-import RestuarantFinder from '../apis/RestuarantFinder'
+import React, {useState, useContext} from 'react'
+import RestaurantFinder from '../apis/RestaurantFinder'
 import { RestaurantsContext } from '../context/RestaurantsContext'
 
 
 const AddRestaurant = () => {
 
-  const {addRestuarant} = React.useContext(RestaurantsContext);
-  const [name, setName] = React.useState('');
-  const [location, setLocation] = React.useState('');
-  const [priceRange, setPriceRange] = React.useState('Price Range');
+  console.log('addResaurant: ', useContext(RestaurantsContext).addRestaurant);
+  const {addRestaurant} = useContext(RestaurantsContext);
+  // console.log('addResaurant: ',addRestaurant);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [priceRange, setPriceRange] = useState('Price Range');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await RestuarantFinder.post('/', {name, location, price_range: priceRange});
+      const response = await RestaurantFinder.post('/', {name, location, price_range: priceRange});
       console.log(response.data.data);
-      addRestuarant(response.data);
+      addRestaurant(response.data);
     } catch (err){
       console.log(err);
     }

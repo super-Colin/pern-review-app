@@ -3,16 +3,16 @@ import React, {useState, createContext} from "react";
 const RestaurantsContext = createContext();
 
 const RestaurantsProvider = (props) => {
-    const [Restaurants, setRestaurants] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
-    const addRestaurant = (Restaurant) => {
-        setRestaurants([...Restaurants, Restaurant]);
+    const addRestaurant = (restaurant) => {
+        setRestaurants([...restaurants, restaurant]);
     }
 
     return(
         <RestaurantsContext.Provider value={{
-            Restaurants,
+            restaurants,
             setRestaurants,
             addRestaurant,
             selectedRestaurant,

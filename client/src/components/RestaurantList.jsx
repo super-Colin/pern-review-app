@@ -9,14 +9,16 @@ import StarRating from './StarRating';
 const ResuarantList = (props) => {
 
   const {restaurants, setRestaurants} = useContext(RestaurantsContext);
+  // console.log('restaurants', restaurants);
   let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
       try{
-        const response = await RestaurantFinder.get('/restaurants');
+        const response = await RestaurantFinder.get('/');
         console.log('fetchData results: ', response.data.data);
         setRestaurants(response.data.data.restaurants);
+        // console.log('resaurants should be updated',response.data.data.restaurants, restaurants);
       }catch(err){console.log(err)}
     };
     fetchData();

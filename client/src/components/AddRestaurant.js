@@ -5,8 +5,8 @@ import { RestaurantsContext } from '../context/RestaurantsContext'
 
 const AddRestaurant = () => {
 
-  console.log('Resaurants Context: ', RestaurantsContext);
-  console.log('Resaurant useContext: ', useContext(RestaurantsContext));
+  // console.log('Resaurants Context: ', RestaurantsContext);
+  // console.log('Resaurant useContext: ', useContext(RestaurantsContext));
   const {addRestaurant} = useContext(RestaurantsContext);
   // console.log('addResaurant: ',addRestaurant);
   const [name, setName] = useState('');

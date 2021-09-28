@@ -22,17 +22,17 @@ app.use(express.json());
 // check for tables
 async function checkTables() {
   try{
-    console.log('checking db tables')
+    console.log('2 checking db tables')
     const results = await db.query(`
       CREATE TABLE IF NOT EXISTS restaurants(
-        id BIGSERIAL NOT NULL PRIMARY KEY,
+        id SERIAL NOT NULL PRIMARY KEY,
         name VARCHAR(50),
         location VARCHAR(50),
         price_range INT
       );
       CREATE TABLE IF NOT EXISTS reviews (
-        id BIGSERIAL NOT NULL PRIMARY KEY,
-        restaurant_id BIGINT NOT NULL REFERENCES restaurants(id),
+        id SERIAL NOT NULL PRIMARY KEY,
+        restaurant_id INT NOT NULL REFERENCES restaurants(id),
         name VARCHAR(50) NOT NULL,
         review TEXT NOT NULL,
         rating INT NOT NULL check(
@@ -42,12 +42,19 @@ async function checkTables() {
       );
     `);
     
-    console.log('checked db tables')
+    // console.log('3 checked db tables', results)
+    console.log('3 checked db tables')
+    console.log('~~~~~~~~~~~~');
   }catch(err){
-    console.log('error creating tables', err)
+    console.log('3 error creating tables', err)
+    console.log('~~~~~~~~~~~~');
   }
 };
+console.log('1 Running checkTables')
 checkTables();
+console.log('4 checkTables Done')
+console.log('~~~~~~~~~~~~');
+
 
 app.get('/test',()=>{
   console.log('test') 
@@ -56,13 +63,17 @@ app.get('/test',()=>{
 
 // Get all Restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
+    console.log('Recieved restaurant GET:', req.url);
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
   try {
     //const results = await db.query("select * from restaurants");
     const restaurantRatingsData = await db.query(
       "select * from restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
+      // "select * from restaurants;"
     );
 
-    console.log(restaurantRatingsData.rows);
+    // console.log(restaurantRatingsData.rows);
+    // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
     res.status(200).json({
       status: "success",
       results: restaurantRatingsData.rows.length,
@@ -77,7 +88,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
 
 //Get a Restaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
-  console.log(req.params.id);
+  console.log( 'recieved get by id: ', req.url, req.params.id);
 
   try {
     const restaurant = await db.query(
@@ -107,7 +118,8 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 // Create a Restaurant
 
 app.post("/api/v1/restaurants", async (req, res) => {
-  console.log(req.body);
+  console.log('Recieved restaurant POST:');
+  // console.log(req.body);
 
   try {
     const results = await db.query(
@@ -145,7 +157,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
     console.log(err);
   }
   console.log(req.params.id);
-  console.log(req.body);
+  // console.log(req.body);
 });
 
 // Delete Restaurant

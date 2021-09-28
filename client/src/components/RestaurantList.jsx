@@ -46,7 +46,7 @@ const ResuarantList = (props) => {
   };
 
   const renderRating = (restaurant) => {
-    if (!restaurant.count) {
+    if (! restaurant.count) {
       return <span className="text-warning">0 reviews</span>;
     }
     return (
@@ -83,6 +83,7 @@ const ResuarantList = (props) => {
               <tr
                 onClick={() => handleRestaurantSelect(restaurant.id)}
                 key={restaurant.id}
+                className={restaurant.id}
               >
                 <td>{restaurant.name}</td>
                 <td>{restaurant.location}</td>

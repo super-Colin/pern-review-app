@@ -1,10 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RestaurantsContext } from "../context/RestaurantsContext";
+import Header from "../components/Header";
 import RestaurantFinder from "../apis/RestaurantFinder";
 import StarRating from "../components/StarRating";
 import Reviews from "../components/Reviews";
 import AddReview from "../components/AddReview";
+
+import StateDebug from "../components/StateDebug";
 
 const RestaurantDetailPage = () => {
   const { id } = useParams();
@@ -26,6 +29,7 @@ const RestaurantDetailPage = () => {
 
   return (
     <div>
+    <Header />
       {selectedRestaurant && (
         <>
           <h1 className="text-center display-1">
@@ -45,6 +49,7 @@ const RestaurantDetailPage = () => {
           <AddReview />
         </>
       )}
+      <StateDebug />
     </div>
   );
 };

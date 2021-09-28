@@ -103,7 +103,7 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
     console.log(reviews);
 
     res.status(200).json({
-      status: "succes",
+      status: "success",
       data: {
         restaurant: restaurant.rows[0],
         reviews: reviews.rows,
@@ -125,7 +125,7 @@ app.post("/api/v1/restaurants", async (req, res) => {
       [req.body.name, req.body.location, req.body.price_range]
     );
     res.status(201).json({
-      status: "succes",
+      status: "success",
       data: {
         restaurant: results.rows[0],
       },
@@ -145,7 +145,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
     );
 
     res.status(200).json({
-      status: "succes",
+      status: "success",
       data: {
         retaurant: results.rows[0],
       },

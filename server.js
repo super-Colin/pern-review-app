@@ -1,5 +1,5 @@
 if( process.env.NODE_ENV === 'production' ){
-  console.log('Looks like we are in production mode, env: ', process.env.NODE_ENV, process.env.PGUSER);
+  console.log('Looks like we are in production mode, env: ', process.env.NODE_ENV, ' PGUSER:', process.env.PGUSER, ' db url:', process.env.DATABASE_URL);
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 }else{
   require('dotenv').config();
@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static( __dirname + 'client/build/' ));
+app.use(express.static( __dirname + '/client/build/' ));
 
 
 // check for tables
@@ -60,9 +60,9 @@ console.log('~~~~~~~~~~~~');
 
 
 // Serve React App
-app.get('/', async (req, res)=>{
-  res.sendFile( __dirname + '/client/build/index.html' );
-})
+// app.get('/', async (req, res)=>{
+//   res.sendFile( __dirname + '/client/build/index.html' );
+// })
 
 
 

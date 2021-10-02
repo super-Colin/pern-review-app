@@ -1,11 +1,11 @@
 const { Pool } = require("pg");
 // pg.defaults.ssl = true;
 
-const connectionString = process.env.DATABASE_URL
 
 const pool = new Pool({
-  connectionString,
-  ssl: true
+  connectionString: process.env.DATABASE_URL,
+  // ssl: true,
+  ssl: { rejectUnauthorized: false },
 });
 module.exports = {
   query: (text, params) => pool.query(text, params),

@@ -1,5 +1,5 @@
 if( process.env.NODE_ENV === 'production' ){
-  console.log('Looks like we are in production mode, skipping dotenv: ', process.env.NODE_ENV);
+  console.log('Looks like we are in production mode, skipping dotenv: ', process.env.NODE_ENV, process.env.PGUSER);
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 }else{
   require('dotenv').config();
@@ -18,11 +18,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static( __dirname + 'client/build' ));
+
 
 // check for tables
 async function checkTables() {
   try{
-    console.log('2 checking db tables')
     const results = await db.query(`
       CREATE TABLE IF NOT EXISTS restaurants(
         id SERIAL NOT NULL PRIMARY KEY,
@@ -42,7 +43,6 @@ async function checkTables() {
       );
     `);
     
-    // console.log('3 checked db tables', results)
     console.log('3 checked db tables')
     console.log('~~~~~~~~~~~~');
   }catch(err){
@@ -56,9 +56,6 @@ console.log('4 checkTables Done')
 console.log('~~~~~~~~~~~~');
 
 
-app.get('/test',()=>{
-  console.log('test') 
-});
 
 
 // Get all Restaurants
@@ -72,8 +69,6 @@ app.get("/api/v1/restaurants", async (req, res) => {
       // "select * from restaurants;"
     );
 
-    // console.log(restaurantRatingsData.rows);
-    // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
     res.status(200).json({
       status: "success",
       results: restaurantRatingsData.rows.length,
@@ -87,7 +82,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
 
 //Get a Restaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
-  console.log( 'recieved get by id: ', req.url, req.params.id);
+  console.log( 'recieved get by id: ', req.url);
 
   try {
     const restaurant = await db.query(
@@ -100,7 +95,6 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
       "select * from reviews where restaurant_id = $1",
       [req.params.id]
     );
-    console.log(reviews);
 
     res.status(200).json({
       status: "success",
@@ -116,8 +110,8 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 // Create a Restaurant
 
 app.post("/api/v1/restaurants", async (req, res) => {
-  console.log('Recieved restaurant POST:');
-  // console.log(req.body);
+  console.log('Recieved restaurant POST:', req.url);
+
 
   try {
     const results = await db.query(

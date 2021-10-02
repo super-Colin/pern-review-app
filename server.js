@@ -43,21 +43,25 @@ async function checkTables() {
       );
     `);
     
-    console.log('3 checked db tables')
-    console.log('~~~~~~~~~~~~');
+    // console.log('3 checked db tables')
+    // console.log('~~~~~~~~~~~~');
   }catch(err){
-    console.log('3 error creating tables', err)
+    console.log('Error creating tables')
+    console.log(err)
     console.log('~~~~~~~~~~~~');
   }
 };
-console.log('1 Running checkTables')
+// console.log('1 Running checkTables')
 checkTables();
 console.log('4 checkTables Done')
 console.log('~~~~~~~~~~~~');
 
+
+
+
 // Serve React App
 app.get('/', async (req, res)=>{
-  res.sendFile( __dirname + 'client/build/index.html' );
+  res.sendFile( __dirname + '/client/build/index.html' );
 })
 
 

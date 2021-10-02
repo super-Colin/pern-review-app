@@ -7,7 +7,7 @@ import StarRating from "../components/StarRating";
 import Reviews from "../components/Reviews";
 import AddReview from "../components/AddReview";
 
-import StateDebug from "../components/StateDebug";
+// import StateDebug from "../components/StateDebug";
 
 const RestaurantDetailPage = () => {
   const { id } = useParams();
@@ -49,7 +49,7 @@ const RestaurantDetailPage = () => {
           <AddReview />
         </>
       )}
-      <StateDebug />
+      {/* <StateDebug /> */}
     </div>
   );
 };

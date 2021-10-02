@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/Header';
 import AddRestaurant from '../components/AddRestaurant';
 import RestaurantList from '../components/RestaurantList';
-import StateDebug from "../components/StateDebug";
+// import StateDebug from "../components/StateDebug";
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
       <Header />
       <AddRestaurant />
       <RestaurantList />
-      <StateDebug />
+      {/* <StateDebug /> */}
     </div>
   )
 }

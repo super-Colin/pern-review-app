@@ -6,7 +6,7 @@ import { useLocation, useParams, useHistory } from 'react-router-dom'
 const AddReview = () => {
   const { id } = useParams();
   const location = useLocation();
-  console.log(location, id);
+  // console.log(location, id);
   const history = useHistory();
 
   const [name, setName] = useState('');

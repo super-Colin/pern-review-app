@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <div>
-      <h1 onClick={sendHome} className="font-weight-light display-1 text-center">Restaurant Finder</h1>
+      <h2 onClick={sendHome} className="bg-primary text-white font-weight-light display-4 text-center">Restaurant Finder</h2>
     </div>
   )
 }

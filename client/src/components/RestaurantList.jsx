@@ -84,7 +84,7 @@ const ResuarantList = (props) => {
               <tr
                 onClick={() => handleRestaurantSelect(restaurant.id)}
                 key={restaurant.id}
-                className={restaurant.id}
+                className={restaurant.id + ' pointerCursor'}
               >
                 <td>{restaurant.name}</td>
                 <td>{restaurant.location}</td>
